@@ -16,9 +16,7 @@ public class CensusAnalyser {
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             Iterator<IndiaCensusCSV> censusCSVIterator = this.getCSVFileIterator(reader, IndiaCensusCSV.class);
-            Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
-            int numofEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
-            return numofEateries;
+            return  this.getCount(censusCSVIterator);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -31,9 +29,7 @@ public class CensusAnalyser {
     public int loadIndiastateCode(String csvFilePath) throws CensusAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             Iterator<IndiaStateCodeCSV> stateCodeCSVIterator = this.getCSVFileIterator(reader, IndiaStateCodeCSV.class);
-            Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCodeCSVIterator;
-            int numofEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
-            return numofEateries;
+            return  getCount(stateCodeCSVIterator);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -41,6 +37,11 @@ public class CensusAnalyser {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION);
         }
+    }
+    private <E> int getCount(Iterator<E> iterator){
+        Iterable<E> csvIterable = () -> iterator;
+        int numofEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+        return numofEateries;
     }
 
     private <E> Iterator<E> getCSVFileIterator(Reader reader,
