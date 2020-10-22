@@ -2,6 +2,9 @@ package censusanalyser;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import csvbulider.CSVBuliderException;
+import csvbulider.CSVBuliderFactory;
+import csvbulider.ICSVBulider;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -26,7 +29,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION);
         } catch (CSVBuliderException e) {
             throw new CensusAnalyserException(e.getMessage(),
-                    e.type.name());
+                    e.getMessage());
         }
     }
 
@@ -43,7 +46,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION);
         } catch (CSVBuliderException e) {
             throw new CensusAnalyserException(e.getMessage(),
-                    e.type.name());
+                    e.getMessage());
         }
     }
     private <E> int getCount(Iterator<E> iterator){
