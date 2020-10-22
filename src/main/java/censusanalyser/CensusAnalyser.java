@@ -34,7 +34,6 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION);
         }
     }
-
     public int loadIndiastateCode(String csvFilePath) throws CensusAnalyserException {
         try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             CsvToBeanBuilder<IndiaStateCodeCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);

@@ -68,7 +68,8 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION, e.type);
         }
     }
-    @Test
+
+     @Test
     public void givenIndianStateCodeCSVFile_ShouldReturnsExactCount() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
