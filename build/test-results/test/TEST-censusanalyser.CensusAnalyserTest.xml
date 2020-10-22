@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-22T11:08:04" hostname="DESKTOP-25DPEJS" time="51.724">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-10-22T11:32:09" hostname="DESKTOP-25DPEJS" time="0.859">
   <properties/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="51.724"/>
+  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.428"/>
+  <testcase name="givenIndiaCensusData_WithCorrectFileTypeIncorrect_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.147"/>
+  <testcase name="givenIndiaStateCode_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.007"/>
+  <testcase name="givenIndiaStateCode_WithCorrectFileButHeadereIncorrect_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.011"/>
+  <testcase name="givenIndiaCensusData_WithCorrectFileButHeadereIncorrect_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.076"/>
+  <testcase name="givenIndiaStatecode_WithCorrectFileDelimiterIncorrect_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.006"/>
+  <testcase name="givenIndiaCensusData_WithCorrectFileDelimiterIncorrect_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.117"/>
+  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.001"/>
+  <testcase name="givenIndiaStateCode_WithCorrectFileButIncorrectType_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.01"/>
+  <testcase name="givenIndianStateCodeCSVFile_ShouldReturnsExactCount" classname="censusanalyser.CensusAnalyserTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
