@@ -29,6 +29,9 @@ public class CensusAnalyser {
         }catch (IllegalStateException e){
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE);
+        }catch (RuntimeException e){
+            throw new CensusAnalyserException(e.getMessage(),
+                    CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION);
         }
     }
 
