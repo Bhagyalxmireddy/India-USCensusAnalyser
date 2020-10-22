@@ -30,7 +30,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION);
         } catch (CSVBuliderException e) {
             throw new CensusAnalyserException(e.getMessage(),
-                    e.getMessage());
+                    e.type.name());
         }
     }
 
@@ -47,7 +47,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION);
         } catch (CSVBuliderException e) {
             throw new CensusAnalyserException(e.getMessage(),
-                    e.getMessage());
+                    e.type.name());
         }
     }
     private <E> int getCount(Iterator<E> iterator){
