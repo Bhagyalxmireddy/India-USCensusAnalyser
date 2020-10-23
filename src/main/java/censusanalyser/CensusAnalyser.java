@@ -77,8 +77,8 @@ public class CensusAnalyser {
                 IndiaCensusCSV censusCSV1 = censusCSVList.get(j);
                 IndiaCensusCSV censusCSV2 =censusCSVList.get(j + 1);
                 if (censusCSVComparator.compare(censusCSV1, censusCSV2) > 0) {
-                   censusCSVList.set(j, censusCSV1);
-                    censusCSVList.set(j + 1, censusCSV2);
+                   censusCSVList.set(j, censusCSV2);
+                    censusCSVList.set(j + 1, censusCSV1);
                 }
             }
         }
@@ -101,8 +101,8 @@ public class CensusAnalyser {
                 IndiaStateCodeCSV censusCSV1 = this.censusCSVList1.get(j);
                 IndiaStateCodeCSV censusCSV2 = this.censusCSVList1.get(j + 1);
                 if (stateComparator.compare(censusCSV1, censusCSV2) > 0) {
-                    this.censusCSVList1.set(j, censusCSV1);
-                    this.censusCSVList1.set(j + 1, censusCSV2);
+                    this.censusCSVList1.set(j, censusCSV2);
+                    this.censusCSVList1.set(j + 1, censusCSV1);
                 }
             }
         }
