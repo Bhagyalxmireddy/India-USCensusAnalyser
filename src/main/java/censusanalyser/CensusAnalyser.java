@@ -14,19 +14,27 @@ import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
 
     List<IndiaCensusCSV> censusCSVList = null;
     List<IndiaStateCodeCSV> censusCSVList1 = null;
+    Map<String,IndiaCensusCSV> censusMap = null;
 
 
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBulider csvBulider = CSVBuliderFactory.createCSVBulider();
-            censusCSVList = csvBulider.getCSVFileList(reader, IndiaCensusCSV.class);
-            return  censusCSVList.size();
+            Iterator<IndiaCensusCSV> censusCSVIterator = csvBulider.getCSVFileIterator(reader, IndiaCensusCSV.class);
+            Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
+            StreamSupport.stream(csvIterable.spliterator(),false)
+                    .forEach(censusCSV -> censusMap.put(censusCSV.state,new IndiaCensusCSV(censusCSV)));
+            return censusMap.size();
+
+            //censusCSVList = csvBulider.getCSVFileList(reader, IndiaCensusCSV.class);
+            //return  censusCSVList.size();
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -42,6 +50,7 @@ public class CensusAnalyser {
     public int loadIndiastateCode(String csvFilePath) throws CensusAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBulider csvBulider = CSVBuliderFactory.createCSVBulider();
+
           //  Iterator<IndiaStateCodeCSV>  stateCSVFileIterator = csvBulider.getCSVFileIterator(reader,IndiaStateCodeCSV.class);
             //Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCSVFileIterator;
            censusCSVList1 =  csvBulider.getCSVFileList(reader, IndiaStateCodeCSV.class);
@@ -112,9 +121,10 @@ public class CensusAnalyser {
     }
 
     public String getStateCensusPopulationSortedData(String indiaCensusCsvFilePath) throws CensusAnalyserException {
-        if(censusCSVList == null || censusCSVList.size() == 0){
+        if(censusMap == null || censusMap.size() == 0){
             throw new CensusAnalyserException("No census Data",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
+        censusCSVList.addAll(censusMap.values());
         Comparator<IndiaCensusCSV> csvComparator = Comparator.comparing(census -> census.state);
         this.sort(censusCSVList, csvComparator);
         String sortedStateCensusJson = new Gson().toJson(censusCSVList);
