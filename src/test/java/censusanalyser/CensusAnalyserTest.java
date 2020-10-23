@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.concurrent.Callable;
 
 public class CensusAnalyserTest {
 
