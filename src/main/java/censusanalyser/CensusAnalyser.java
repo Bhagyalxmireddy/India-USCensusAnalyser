@@ -21,11 +21,10 @@ public class CensusAnalyser {
     List<IndiaCensusCSV> censusCSVList = null;
     List<IndiaStateCodeCSV> censusCSVList1 = null;
 
+
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBulider csvBulider = CSVBuliderFactory.createCSVBulider();
-            //Iterator<IndiaCensusCSV> csvFileIterator = csvBulider.getCSVFileIterator(reader,IndiaCensusCSV.class);
-            //Iterable<IndiaCensusCSV> csvIterable = () -> csvFileIterator;
             censusCSVList = csvBulider.getCSVFileList(reader, IndiaCensusCSV.class);
             return  censusCSVList.size();
         } catch (IOException e) {
@@ -43,9 +42,9 @@ public class CensusAnalyser {
     public int loadIndiastateCode(String csvFilePath) throws CensusAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBulider csvBulider = CSVBuliderFactory.createCSVBulider();
-            Iterator<IndiaStateCodeCSV>  stateCSVFileIterator = csvBulider.getCSVFileIterator(reader,IndiaStateCodeCSV.class);
-            Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCSVFileIterator;
-           // censusCSVList1 =  csvBulider.getCSVFileList(reader, IndiaStateCodeCSV.class);
+          //  Iterator<IndiaStateCodeCSV>  stateCSVFileIterator = csvBulider.getCSVFileIterator(reader,IndiaStateCodeCSV.class);
+            //Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCSVFileIterator;
+           censusCSVList1 =  csvBulider.getCSVFileList(reader, IndiaStateCodeCSV.class);
             return  censusCSVList1.size();
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
@@ -81,8 +80,8 @@ public class CensusAnalyser {
                 IndiaCensusCSV censusCSV1 = this.censusCSVList.get(j);
                 IndiaCensusCSV censusCSV2 =this.censusCSVList.get(j + 1);
                 if (censusCSVComparator.compare(censusCSV1, censusCSV2) > 0) {
-                    this.censusCSVList.set(j, censusCSV1);
-                    this.censusCSVList.set(j + 1, censusCSV2);
+                    this.censusCSVList.set(j, censusCSV2);
+                    this.censusCSVList.set(j + 1, censusCSV1);
                 }
             }
         }
@@ -105,8 +104,8 @@ public class CensusAnalyser {
                 IndiaStateCodeCSV censusCSV1 = this.censusCSVList1.get(j);
                 IndiaStateCodeCSV censusCSV2 = this.censusCSVList1.get(j + 1);
                 if (stateComparator.compare(censusCSV1, censusCSV2) > 0) {
-                    this.censusCSVList1.set(j, censusCSV1);
-                    this.censusCSVList1.set(j + 1, censusCSV2);
+                    this.censusCSVList1.set(j, censusCSV2);
+                    this.censusCSVList1.set(j + 1, censusCSV1);
                 }
             }
         }
