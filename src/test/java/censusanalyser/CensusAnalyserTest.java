@@ -41,7 +41,7 @@ public class CensusAnalyserTest {
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.RUNTIME_EXCEPTION, e.type);
         }
     }
 
@@ -132,6 +132,16 @@ public class CensusAnalyserTest {
             Assert.assertEquals("Uttar Pradesh", censusCSV[0].state);
         }catch (CensusAnalyserException e){}
 
+    }
+    @Test
+    public void givenIndiaCensusData_WhenSortedOnPopulation_ShouldReturnSortedResult(){
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            String populationSortedData = censusAnalyser.getStateCensusPopulationSortedData(INDIA_CENSUS_CSV_FILE_PATH);
+            IndiaCensusCSV[] censusCSVS = new Gson().fromJson(populationSortedData,IndiaCensusCSV[].class);
+            Assert.assertEquals("607688",censusCSVS[0].population);
+        }catch (CensusAnalyserException e){}
     }
     @Test
     public void givenIndiastateCode_WhenSortedOnState_ShouldReturnSortedResult(){
