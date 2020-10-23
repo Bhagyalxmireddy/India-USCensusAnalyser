@@ -76,8 +76,8 @@ public class CensusAnalyser {
                 IndiaCensusCSV censusCSV1 = censusCSVList.get(j);
                 IndiaCensusCSV censusCSV2 =censusCSVList.get(j + 1);
                 if (censusCSVComparator.compare(censusCSV1, censusCSV2) > 0) {
-                   censusCSVList.set(j, censusCSV1);
-                    censusCSVList.set(j + 1, censusCSV2);
+                   censusCSVList.set(j, censusCSV2);
+                    censusCSVList.set(j + 1, censusCSV1);
                 }
             }
         }
