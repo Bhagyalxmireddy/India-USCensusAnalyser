@@ -76,7 +76,7 @@ public class CensusAnalyserTest {
             int stateCode = censusAnalyser.loadIndiastateCode(INDIA_STATE_CSV_FILE_PATH);
             Assert.assertEquals("37", stateCode);
         } catch (CensusAnalyserException e) {
-
+            e.printStackTrace();
         }
     }
         @Test
