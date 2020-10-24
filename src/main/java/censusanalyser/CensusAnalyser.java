@@ -40,8 +40,9 @@ public class CensusAnalyser {
             csvToBeanBuilder.withType(IndiaStateCodeCSV.class);
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
             CsvToBean<IndiaStateCodeCSV> csvToBean = csvToBeanBuilder.build();
-            Iterator<IndiaStateCodeCSV> stateCodeCSVIterator = csvToBean.iterator();
-            Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCodeCSVIterator;
+            Iterator<IndiaStateCodeCSV> stateCSVIterator = csvToBean.iterator();
+            Iterable<IndiaStateCodeCSV> stateCSVIterable = csvToBeanBuilder.build();
+            Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCSVIterator;
             int numofEateries  = (int) StreamSupport.stream(csvIterable.spliterator(),false).count();
             return numofEateries;
         } catch (IOException e) {
